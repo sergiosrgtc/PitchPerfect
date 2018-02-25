@@ -41,5 +41,8 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSMicrophoneUsageDescription</key>
+    
+    <string>MyCoolApp uses the microphone to create fun sound effects</string>
 </dict>
 </plist>
