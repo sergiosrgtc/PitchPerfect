@@ -77,7 +77,9 @@ class PlaySoundsViewController: UIViewController {
     }
     
     @IBAction func recordButtonPressed(_ sender: UIButton) {
-        audioPlayerNode.stop()
+        if audioPlayerNode != nil && audioPlayerNode.isPlaying{
+            audioPlayerNode.stop()
+        }
         self.navigationController?.popViewController(animated: true)
     }
 }
