@@ -35,9 +35,9 @@ class RecordSoundViewController: UIViewController, AVAudioRecorderDelegate {
         super.viewDidLoad()
         recordingLabel.text = "Tap to Record"
         // Transparent navigation bar
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

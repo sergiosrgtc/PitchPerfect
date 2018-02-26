@@ -112,18 +112,20 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         
         // play the recording!
         audioPlayerNode.play()
-        //Update player information 
-        Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
+        //Update player information
+        let intervalSeconds = 0.01
+        Timer.scheduledTimer(timeInterval: intervalSeconds, target: self, selector: #selector(updateAudioProgressView), userInfo: nil, repeats: true)
     }
     @objc func updateAudioProgressView()
     {
         if let nodeTime: AVAudioTime = audioPlayerNode.lastRenderTime, let playerTime: AVAudioTime = audioPlayerNode.playerTime(forNodeTime: nodeTime) {
+            let timeLiteral = 60
             let progress = Double(Double(playerTime.sampleTime) / playerTime.sampleRate)
-            progressLabel.text = String(format:"%02i:%02i", Int(progress) / 60 % 60, Int(progress) % 60)
+            progressLabel.text = String(format:"%02i:%02i", Int(progress) / timeLiteral % timeLiteral, Int(progress) % timeLiteral)
             
             let audioNodeFileLength = AVAudioFrameCount(audioFile.length)
             let duration = Double(Double(audioNodeFileLength) / playerTime.sampleRate)
-            durationLabel.text = String(format:"%02i:%02i", Int(duration) / 60 % 60, Int(duration) % 60)
+            durationLabel.text = String(format:"%02i:%02i", Int(duration) / timeLiteral % timeLiteral, Int(duration) % timeLiteral)
             
             progressView.setProgress(Float(progress/duration), animated: false)
         }
@@ -159,7 +161,7 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
     // MARK:- UI Functions
     
     func configureUI(_ playState: PlayingState) {
-        self.navigationItem.setHidesBackButton(true, animated:true);
+        navigationItem.setHidesBackButton(true, animated:true);
         switch(playState) {
         case .playing:
             setPlayButtonsEnabled(false)
@@ -172,6 +174,13 @@ extension PlaySoundsViewController: AVAudioPlayerDelegate {
         case .paused:
             stopButton.setImage(#imageLiteral(resourceName: "play_white"), for: UIControlState.normal)
         }
+        stopButton.imageView?.contentMode = .scaleAspectFit
+        echoButton.imageView?.contentMode = .scaleAspectFit
+        snailButton.imageView?.contentMode = .scaleAspectFit
+        vaderButton.imageView?.contentMode = .scaleAspectFit
+        rabbitButton.imageView?.contentMode = .scaleAspectFit
+        reverbButton.imageView?.contentMode = .scaleAspectFit
+        chipmunkButton.imageView?.contentMode = .scaleAspectFit
     }
     
     func setPlayButtonsEnabled(_ enabled: Bool) {

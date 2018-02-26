@@ -10,7 +10,13 @@ import UIKit
 import AVFoundation
 
 class PlaySoundsViewController: UIViewController {
-
+    
+    // MARK:- Constants
+    let slowRate : Float = 0.4
+    let fastRate : Float = 2.3
+    let highPitchRate : Float = 1500
+    let lowPitchRate : Float = -1050
+    
     // MARK:- Variables
     var recordedAudioURL:URL!
     var audioFile:AVAudioFile!
@@ -50,13 +56,13 @@ class PlaySoundsViewController: UIViewController {
     @IBAction func playSoundForButton(_ sender: UIButton) {
         switch(ButtonType(rawValue: sender.tag)!) {
         case .slow:
-            playSound(rate: 0.4)
+            playSound(rate: slowRate)
         case .fast:
-            playSound(rate: 2.3)
+            playSound(rate: fastRate)
         case .chipmunk:
-            playSound(pitch: 1500)
+            playSound(pitch: highPitchRate)
         case .vader:
-            playSound(pitch: -1100)
+            playSound(pitch: lowPitchRate)
         case .echo:
             playSound(echo: true)
         case .reverb:
@@ -80,6 +86,6 @@ class PlaySoundsViewController: UIViewController {
         if audioPlayerNode != nil && audioPlayerNode.isPlaying{
             audioPlayerNode.stop()
         }
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 }
